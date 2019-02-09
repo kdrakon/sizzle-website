@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>The Sizzle</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  
+  <style type="text/css">
+    html {
+    font-family:sans-serif;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%
+    }
+
+    body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	/* [disabled]background-color:#f1f1f1; */
+	color: #333;
+	font-size: 16px;
+	line-height: 24px;
+	padding-left: 20px;
+	padding-right: 20px;
+    }
+
+    h1 {
+    margin-top:0;
+    margin-bottom:5px;
+    font-size:22px;
+    line-height:24px;
+    font-weight:700
+    }
+
+    h2 {
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-right: 40px;
+	border-top: 2px solid #333;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 700
+    }
+
+    h3 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-size: 16px;
+	font-weight: 700
+    }
+
+    h5 {
+    margin-top:5px;
+    margin-bottom:10px;
+    color:rgba(51,51,51,.5);
+    font-size:14px;
+    line-height:20px;
+    font-weight:400
+    }
+
+    p {
+    margin-bottom:15px
+    }
+
+    a {
+    color:#cc6596;
+    text-decoration:none
+    }
+    
+    a:hover {
+    color:#f13f74;
+      }
+
+    li {
+    margin-bottom:5px
+    }
+
+    .wrapper {
+	display: block;
+	max-width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: auto;
+	/* [disabled]background-color: #fff; */
+	margin-top: auto;
+    }
+
+    .wrapper.blank {
+    padding-top:0;
+    padding-bottom:0;
+    background-color:transparent
+    }
+
+    .signoff {
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 1px solid rgba(51,51,51,.7)
+    }
+
+    .footnotes {
+	margin-top: 40px;
+	color: rgba(51,51,51,.7)
+    }
+
+    .logo {
+	display: block;
+	height: 25px;
+	margin-bottom: 25px;
+    }
+
+    .overview {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .overview h2 {
+    border-top-color:#f13f74;
+    color:#f13f74
+    }
+
+    .overview a {
+    color:rgba(51,51,51,.6);
+    text-decoration:underline
+    }
+
+    .news {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .news h2 {
+    border-top-color:#ff6970;
+    color:#ff6970
+    }
+
+    .cool-shit {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .cool-shit h2 {
+    border-top-color:#6acaef;
+    color:#6acaef
+    }
+
+    .links {
+    font-size:12px
+    }
+
+    .note {
+    margin-top:20px;
+    margin-bottom:20px;
+    padding:20px 20px 10px;
+    background-color:#fff5db;
+    color:rgba(51,51,51,.8)
+    }
+
+    .heading {
+    margin-bottom:20px
+    }
+	
+	.item-links {
+	font-size: 14px;
+	margin: 20 0 40	0
+	}
+  </style>
+<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="https://thesizzle.com.au"><img src="https://thesizzle.com.au/images/Logo-TheSizzle-og.png" class="logo"></a>
+    </div>
+
+    <div class="wrapper">
+    
+    <div class="heading">
+        <h1><i class="em em-the_horns"></i>Issue 666<i class="em em-the_horns"></i></h1>
+        <h5>Tuesday, 26th June, 2018</h5>
+    </div>
+    
+    <!-- <div class="note">
+    </div> -->
+    
+    <div class="overview">
+        <h2 id="overview">In This Issue</h2>
+        <ul>
+            <li>Huawei loves to send Australian politicians on all expenses paid "study tours" in China</li>
+            <li>Dota2 team kicked out of $15m tournament & South Korean man thrown in jail for selling an Overwatch hack</li>
+            <li>The NSA has spying gear in 8 of AT&T's main USA data centres</li>
+            <li>Anyone can install betas of iOS 12, tvOS12 and macOS Mojave now</li>
+            <li>WPA3 is official, but device support probably not coming for a while</li>
+            <li>Integrate Have I Been Pwnd into Wordpress so your WP install doesn't get pwnd</li>
+            <li>The biggest leecher on the NBN sucked down 23.59TB of data in a single month</li>
+            <li>Cheap 2.5" SATA-USB3 enclosure, Nokia 3, Google Play credit, Xiaomi Wiha tools, Xiaomi Mi Band 3 & 10% off eBay site wide</li>
+        </ul>
+    </div>
+    
+    <div class="news">
+        <h2>News</h2>
+
+        <div class="item">
+            <h3>Huawei loves to send Australian politicians on all expenses paid "study tours" in China</h3>
+            <p>
+                An investigation by the Australian Strategic Policy Institute has revealed that <a href="http://www.abc.net.au/news/2018-06-26/chinese-tech-company-huawei-sponsors-politicians-trips/9907064">Huawei is the "biggest corporate sponsor of overseas travel for Australia's federal politicians"</a>. Since 2010, Huawei has paid for 12 Australian politicians and their entourages to visit Shenzhen and tour Huawei's HQ - you assume, butter up these gullible politicians so Huawei is remembered when it's time for them to decide on policy relating to Huawei's interest. I don't really blame Huawei for doing this, it is legal after all (wtf, right?), I find it more of an issue that the politicians actually bother going despite the bad impression it creates.
+            </p>
+        </div>
+      
+        <div class="item">
+            <h3>Dota2 team kicked out of $15m tournament & South Korean man thrown in jail for selling an Overwatch hack</h3>
+            <p>
+                Two bits of gaming news today. A team competing in The International 2018, a massive Dota 2 eSports tournament with a $15m prize pool (fuckkkk meee), has been <a href="https://motherboard.vice.com/en_us/article/3k49z9/dota-2-player-who-used-programmable-mouse-disqualified-his-team-from-dollar15-million-tournament">kicked out because of an illegal mouse</a>. Peruvian team Thunder Predator, used a Razer Synapse 3 gaming mouse with programmable buttons. This is a big no no and the tournament organisers reckons using a programmable mouse is the same as using a software script to cheat. Over in South Korea, <a href="https://dotesports.com/overwatch/news/ow-hacker-sentenced-prison-25213">a dude was sent to jail for a year because he sold an Overwatch hack</a>, violating the "Game Industry Promotion Law and Information and Communication Technology Protection Law". They take this shit seriously - hard time for a video game hack!
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>The NSA has spying gear in 8 of AT&T's main USA data centres</h3>
+            <p>
+                Back in 2007, AT&T tech Mark Klein and PBS Frontline showed us the infamous <a href="https://en.wikipedia.org/wiki/Room_641A">Room 641A</a> in AT&T's San Francisco data centre that had NSA's fibre optic taps and spying gear installed. Today, <a href="https://theintercept.com/2018/06/25/att-internet-nsa-spy-hubs/">The Intercept has revealed more info on the collaboration between the NSA and AT&T on a surveillance program code-named FAIRVIEW</a>. The NSA set up operations in AT&T's downtown data centres in Atlanta, Chicago, Dallas, Los Angeles, New York City, San Francisco, Seattle, and Washington D.C - crucial parts of internet infrastructure that not only have vast amounts of AT&T customer's data flowing through, but also the gear of other ISPs that want to talk to AT&T's customers too. The co-operation of just AT&T, at just these 8 data centres allowed the NSA to have a massive overview of all internet traffic in the USA. 
+        </div>
+
+        <div class="item">
+            <h3>Anyone can install betas of iOS 12, tvOS12 and macOS Mojave now</h3>
+            <p>
+                <a href="https://www.macstories.net/linked/apple-opens-ios-12-public-beta/">Apple has released the first public beta of iOS 12</a>, tvOS 12 and macOS Mojave. Earlier betas were only for registered and paid up developers, but now any old bum can whack test software on their primary machine and whinge when stuff doesn't work. Honestly though, it's a good way for Apple to get on top of major bugs before the release version that people like me who don't want to waste time with an unfinished product, will install on their devices. <a href="https://www.macstories.net/ios/ios-12-beta-our-favorite-tidbits-and-hidden-features-so-far/">Macstories has a list of the interesting stuff in iOS 12</a> if you want to tempt yourself into installing the beta on your devices. I'm kinda tempted to install macOS Mojave on an external SSD so I can use the black UI on my iMac Pro.
+        </div>
+
+        <div class="item">
+            <h3>WPA3 is official, but device support probably not coming for a while</h3>
+            <p>
+                <a href="https://www.theverge.com/circuitbreaker/2018/6/26/17501594/wpa3-wifi-security-certification">WPA3, the more secure successor to the wi-fi security standard WPA2, is now an official thing</a>. After a while in the draft stages, devices can now be certified as WPA3 compatible. If you want to take advantage of WPA3 (you will), you'll need your devices to be updated to support it - new hardware isn't required. WPA2 devices can still connect with WPA3 devices and vice-versa, just with less security. WPA3 has nifty security features like forward secrecy and "Easy Connect", so setting up IoT devices is just a matter of scanning a QR code on your smartphone. Nothing on the market right now supports WPA3 and apparently it won't really be a thing until 802.11ax comes on the market in 2020, as 802.11ax is designed with WPA3 in mind.
+        </div>
+    </div>
+
+    <div class="cool-shit">
+        <h2>Not News, But Still Cool</h2>
+
+        <div class="item">
+            <h3>Integrate Have I Been Pwnd into Wordpress so your WP install doesn't get pwnd</h3>
+            <p>
+                Here's a nifty Wordpress plugin for any webmasters (do people still call themselves that?) or bloggers out there that haven't sold their souls to Medium or Facebook: <a href="https://wordpress.org/plugins/passwords-evolved/">Passwords Evolved</a>. It ties in to the wonderful Have I Been Pwnd API and checks user password hashes for hashes that match those on the huge list of compromised passwords. This makes sure people are using different passwords on your site, so they don't get hacked - particularly admin/editor roles that have access to sensitive info and settings.
+        </div>
+
+        <div class="item">
+            <h3>The biggest leecher on the NBN sucked down 23.59TB of data in a single month</h3>
+            <p>
+                <a href="https://www.itnews.com.au/news/nbn-cos-top-user-downloads-236tb-a-month-495646">Here's some NBN related facts straight from the horses mouth for ya</a>: the average user downloads 190GB and uploads 17.5GB of data per month. The median usage is 108GB of downloads and 7GB of uploads a month. The top user, Australia's most problematic customer for an ISP sucks down 23.59TB of data a month. What the hell is this person doing? I hope it's something constructive like scientific data that's being used to provide a wonderful innovation (narrator: it's porn). So there you go, aren't you glad your brain now contains that information?
+        </div>
+
+        <div class="item">
+            <h3>Cheap 2.5" SATA-USB3 enclosure, Nokia 3, Google Play credit, Xiaomi Wiha tools, Xiaomi Mi Band 3 & 10% off eBay site wide</h3>
+            <p>
+                <ul><li><a href="https://www.ozbargain.com.au/node/382853">Orico 2139U3</a> 2.5" SATA external USB 3.0 enclosure - $5</li>
+                <li><a href="https://www.ozbargain.com.au/node/387027">Nokia 3 with $40 Vodafone starter kit</a> and $20 Netflix gift card @ Woolworths tomorrow - $119</li>
+                <li><a href="https://ausdroid.net/2018/06/26/coles-10-off-google-play-gift-cards-week-2/amp/">10% off Google Play gift cards</a> @ Coles, June 27th until July 3rd</li>
+                <li><a href="https://www.ozbargain.com.au/node/387135">Xiaomi Wiha precision screwdriver set</a> - $27</li>
+                <li><a href="https://www.ozbargain.com.au/node/386884">10% off eBay site wide with the code PIZZAZZ</a> (min $50 spend)</li>
+                <li><a href="https://www.ozbargain.com.au/node/387211">Xiaomi Mi Band 3</a> - $39 @ Zapals</li></ul>
+        </div>
+
+        <div class="signoff">
+            <p><em>That's it, see ya tomorrow!</em><br><em>--Anthony</em></p>
+            <p><i class="em em-notes"></i><a href="https://song.link/au/i/399165966">Mötley Crüe - Shout At The Devil</a><i class="em em-notes"></i></p>
+        </div>
+    </div>
+  
+    </div>
+  
+    <div class="wrapper">
+        <div class="item-links">
+            <p>The Sizzle is curated by Anthony &quot;<a href="https://twitter.com/decryption">@decryption</a>&quot; Agius and emailed every weekday afternoon. <a href="http://slack.thesizzle.com.au">Join us on Slack</a> and chat with other Sizzle subscribers.</p>
+
+            <p><em>The Sizzle acknowledges the traditional owners of country throughout Australia and recognises their continuing connection to land, water and community. I pay my respect to them and their cultures, and to elders both past and present.​</em></p>
+
+            <p>This email was sent to <a href="mailto:*|EMAIL|*" target="_blank">*|EMAIL|*</a><br>
+            <a href="*|ABOUT_LIST|*" target="_blank">why did I get this?</a> | <a href="*|UNSUB|*">unsubscribe from this list</a> | <a href="*|UPDATE_PROFILE|*">update subscription preferences</a><br>
+            <center>*|LIST:ADDRESSLINE|*</center></p>
+       </div>
+    </div>
+   
+
+</body>
+</html>

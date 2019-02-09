@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>The Sizzle</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  
+  <style type="text/css">
+    html {
+    font-family:sans-serif;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%
+    }
+
+    body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	/* [disabled]background-color:#f1f1f1; */
+	color: #333;
+	font-size: 16px;
+	line-height: 24px;
+	padding-left: 20px;
+	padding-right: 20px;
+    }
+
+    h1 {
+    margin-top:0;
+    margin-bottom:5px;
+    font-size:22px;
+    line-height:24px;
+    font-weight:700
+    }
+
+    h2 {
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-right: 40px;
+	border-top: 2px solid #333;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 700
+    }
+
+    h3 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-size: 16px;
+	font-weight: 700
+    }
+
+    h5 {
+    margin-top:5px;
+    margin-bottom:10px;
+    color:rgba(51,51,51,.5);
+    font-size:14px;
+    line-height:20px;
+    font-weight:400
+    }
+
+    p {
+    margin-bottom:15px
+    }
+
+    a {
+    color:#cc6596;
+    text-decoration:none
+    }
+    
+    a:hover {
+    color:#f13f74;
+      }
+
+    li {
+    margin-bottom:5px
+    }
+
+    .wrapper {
+	display: block;
+	max-width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: auto;
+	/* [disabled]background-color: #fff; */
+	margin-top: auto;
+    }
+
+    .wrapper.blank {
+    padding-top:0;
+    padding-bottom:0;
+    background-color:transparent
+    }
+
+    .signoff {
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 1px solid rgba(51,51,51,.7)
+    }
+
+    .footnotes {
+	margin-top: 40px;
+	color: rgba(51,51,51,.7)
+    }
+
+    .logo {
+	display: block;
+	height: 25px;
+	margin-bottom: 25px;
+    }
+
+    .overview {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .overview h2 {
+    border-top-color:#f13f74;
+    color:#f13f74
+    }
+
+    .overview a {
+    color:rgba(51,51,51,.6);
+    text-decoration:underline
+    }
+
+    .news {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .news h2 {
+    border-top-color:#ff6970;
+    color:#ff6970
+    }
+
+    .cool-shit {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .cool-shit h2 {
+    border-top-color:#6acaef;
+    color:#6acaef
+    }
+
+    .links {
+    font-size:12px
+    }
+
+    .note {
+    margin-top:20px;
+    margin-bottom:20px;
+    padding:20px 20px 10px;
+    background-color:#fff5db;
+    color:rgba(51,51,51,.8)
+    }
+
+    .heading {
+    margin-bottom:20px
+    }
+	
+	.item-links {
+	font-size: 14px;
+	margin: 20 0 40	0
+	}
+  </style>
+<!-- <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> -->
+<link rel='stylesheet' href='https://unpkg.com/emoji.css/dist/emoji.min.css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="https://thesizzle.com.au"><img src="https://thesizzle.com.au/images/Logo-TheSizzle-og.png" class="logo"></a>
+    </div>
+
+    <div class="wrapper">
+    
+    <div class="heading">
+        <h1>Issue 787</h1>
+        <h5>Monday, 17th December 2018</h5>
+    </div>
+    
+    <!-- <div class="note">
+    </div> -->
+    
+    <div class="overview">
+        <h2 id="overview">In This Issue</h2>
+        <ul>
+            <li>API error exposes private pics of 6.8m Facebook users to 1,500 app developers</li>
+            <li>Washington Post got a look at the draft report on Russian shitposting</li>
+            <li>Score $10k for dobbing in your boss for using warez at work</li>
+            <li>Electric scooters are now legal in QLD</li>
+            <li>Apple reckons they found a way around Qualcomm's software patents</li>
+            <li>The 1984 Macintosh user manual is a delightful read 34 years later</li>
+            <li>Birds have learned to use Siri and Alexa</li>
+            <li>Cheap Sonos, SNES Mini, Yamaha soundbars, Yubi Keys, 360-degree 4K camera, Spotify, Kindle, Google Home Hub, GoPro, UE speakers</li>
+        </ul>
+    </div>
+    
+    <div class="news">
+        <h2>News</h2>
+
+        <div class="item">
+            <h3>API error exposes private pics of 6.8m Facebook users to 1,500 app developers</h3>
+            <p>
+                Facebook announced over the weekend that "a photo API bug might have resulted in millions of people having their private photos become improperly accessible by up to 1,500 apps for a period of 12 days in September 2018". <a href="https://developers.facebook.com/blog/post/2018/12/14/notifying-our-developer-ecosystem-about-a-photo-api-bug/">According to their blog post</a>, up to 6.8m users could have had their photos exposed to these apps if the app developer decided to suck all those photos down. It's unlikely this happened, but just goes to show that the slightest developer mistake and boom, all that stuff you think nobody can see goes public. The Irish Data Protection Commissioner is looking into using the <a href="https://www.itnews.com.au/news/irish-regulator-investigates-facebook-over-private-photo-glitch-516975">EU's GDPR laws to punish Facebook</a> for this error.
+            </p>
+        </div>
+      
+        <div class="item">
+            <h3>Washington Post got a look at the draft report on Russian shitposting</h3>
+            <p>
+                The US government has spent years investigating Russia's social media disinformation strategy that the Russians allegedly used during the 2016 Presidential election, but only recently did Facebook, Twitter and Google hand over data to the investigation. <a href="https://www.washingtonpost.com/technology/2018/12/16/new-report-russian-disinformation-prepared-senate-shows-operations-scale-sweep/?noredirect=on&utm_term=.4bdfed3ef970">The Washington Post got its hands on a draft of the analysis of that data</a> and found that yeah, state sponsored Russians (the Internet Research Agency) were systematically shitposting in order to create social unrest. Here's one example: the IRA would barrage social media with content designed to <em>"sap the political clout of left-leaning African American voters by undermining their faith in elections and spreading misleading information about how to vote</em>". I can't wait to read the finished report whenever it comes out.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Score $10k for dobbing in your boss for using warez at work</h3>
+            <p>
+                The Software Alliance (who call themselves BSA, but I dunno what the B stands for here) has given <a href="https://torrentfreak.com/tipster-gets-10000-reward-for-reporting-software-piracy-181214/">a $10,000 reward to someone who dobbed in their employer for using pirated software</a>. It was an anonymous tip that had something to do with a manufacturing firm who later ended up settling with the BSA for $160,000 instead of going to court. I'm not a fan of ratting people out to the authorities, but ripping another business off so your business can save some cash isn't cool. So, if you work for someone who's too cheap to pay for the software they use to make money, <a href="https://reporting.bsa.org/r/report/add.aspx?ln=en-au&src=AU">you can visit the BSA's website</a> and maybe you'll get a nice lump of cash.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Electric scooters are now legal in QLD</h3>
+            <p>
+                <a href="https://thedriven.io/2018/12/17/queensland-bends-the-rules-to-respond-to-surge-in-e-scooter-demand/">Queensland has reformed its "rideables" laws, so electric scooters are legal to operate on public pathways</a>. The rules states that the vehicles must be electric, a max speed of 25km/hr, need a braking system and can't weigh more than 60kg. "Personal mobility devices" also need to be <em>"no bigger than 1.25m x 0.7m in length and width"</em>, which rules out electric bikes unfortunately. You can also ride on "main roads and streets for a short distance of 50m (say to avoid an obstruction)" and <em>"riders will be allowed to travel on local streets that are designated 50km/hr top speed and have no line markings or median strips"</em>. So if you're a Queenslander dreaming of owning a Xiaomi scooter (<a href="https://www.gearbest.com/skateboard/pp_596619.html?wid=1433363#goodsDetail">AU$560 delivered</a>), go for it!
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Apple reckons they found a way around Qualcomm's software patents</h3>
+            <p>
+                I reported a few days ago that Qualcomm managed to get a Chinese court to ban sales of iPhones in China because Apple is using Qualcomm's patents without permission - following up on this, iPhones are still on sale over there and <a href="https://www.theverge.com/2018/12/13/18139206/qualcomm-china-iphone-xs-xr-ban-lawsuit">Qualcomm's trying to get the current crop of iPhones</a> (the Xs, and Xr) banned too. However, <a href="https://www.reuters.com/article/us-apple-qualcomm-china/apple-to-push-software-update-in-china-as-qualcomm-case-threatens-sales-ban-idUSKBN1OD0B1">Apple reckons they've come up with a software fix</a> to get around the "resizing photographs and managing apps on a touch screen" patents. I guess this means Chinese iPhones will have different ways of resizing photos and re-arranging apps in order to not infringe on Qualcomm's patents? It's a very slow news day.
+            </p>
+        </div>
+    </div>
+
+    <div class="cool-shit">
+        <h2>Not News, But Still Cool</h2>
+
+        <div class="item">
+            <h3>The 1984 Macintosh user manual is a delightful read 34 years later</h3>
+            <p>
+                Back in 2007, <a href="https://www.peterme.com/2007/08/27/thoughts-on-and-pics-of-the-original-macintosh-user-manual/">Peter Merholz scored a copy of the original Macintosh user manual and blogged about it</a>. I'm glad he did as that OG manual is such a historical document in the history of how humans interact with computers. The language is very natural and friendly, like "Until you save your work, it exists only in the computer's memory - like thoughts that are lost unless you write them down" and "the Finder is like a central hallway in the Macintosh house". I kinda miss that from technical documentation. There's no reason it has to be so boring and dry! <a href="www.maccaps.com/MacCaps/DIY_Information_files/Macintosh_Manual_1984.pdf">You can gawk at the full manual in PDF form</a>, it really is a delight to flick through.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Birds have learned to use Siri and Alexa</h3>
+            <p>
+                Birds are using Siri and Alexa. Yeah that's right, <a href="https://www.newsweek.com/parrot-alexa-amazon-african-grey-england-animals-1260318">cheeky parrots and budgies that can talk have learned to say "Alexa" and "Siri" and are up to no good</a>! A parrot in this story tried to use Alexa to order watermelons and light bulbs while its owner wasn't home, but luckily the human had a parental lock set on the Alexa and the order didn't go through. Here's some videos! A parrot using <a href="https://www.youtube.com/watch?v=JeQD4UdGY-A">Alexa to turn the lights on</a> and a parakeet <a href="https://www.youtube.com/watch?v=TbPxpi05ruY">asking Siri to give info on chickens</a>.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Cheap Sonos, SNES Mini, Yamaha soundbars, Yubi Keys, 360-degree 4K camera, Spotify, Kindle, Google Home Hub, GoPro, UE speakers</h3>
+            <p>
+                <ul>
+                    <li><a href="https://www.ozbargain.com.au/node/425018">20% off Sonos gear at VideoPro</a>, so the Sonos One twin pack is $450 and the Beam is $505</li>
+
+                    <li><a href="https://www.ozbargain.com.au/node/425636">Super Nintendo Classic Mini</a> - $94.40 at Amazon AU</li>
+
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2FNew-Yamaha-ATS-1080-Black-2-1Ch-Soundbar-System%2F153205995677">Yamaha ATS-1080 soundbar</a> for $189.10 delivered with the code PLASMA</li>
+
+                    <li><a href="https://www.ozbargain.com.au/node/425340">20% off Yubi Keys</a> if you fake being a student or teacher (they don't seem to verify it)</li>
+
+                    <li><a href="https://www.ozbargain.com.au/node/425308">360fly 360-degree 4K camera</a> for $175 + delivery at JB Hi-Fi</li>
+
+                    <li><a href="https://www.ozbargain.com.au/node/416873">3 months of Spotify Premium</a> for 99c for new users or $11.99 for for existing users, plus <a href="https://www.ozbargain.com.au/node/425272">15% off Spotify gift cards at Big W</a></li>
+                </ul>
+
+                The Good Guys eBay store has a bunch of cheap stuff using the code PTGGS20:
+
+                <ul>
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2FNEW-Kindle-B07741S7Y8-Paperwhite-8GB-Black-eReader%2F143020566655%3Fhash%3Ditem214cb0a87f%253Ag%253AkW0AAOSwaepb87id%253Ark%253A1%253Apf%253A0%23shpCntId">Amazon Kindle Paperwhite 8GB</a> - $143.20</li>
+                    
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2FNEW-Google-GA00516-AU-Home-Hub-Chalk%2F113343582077">Google Home Hub</a> - $158.40</li>
+                    
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2FNEW-GoPro-GPCHDHX-701-Hero7-Black-%2F113275052636%3Fhash%3Ditem1a5fb8225c">GoPro Hero 7 Black</a> - $439.20</li>
+                    
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2FNEW-Ultimate-Ears-3352588-ROLL-2-Volcano-%2F142526330927%3Fhash%3Ditem212f3b382f">UE Roll 2 speaker</a> - $67.20</li>
+                    
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2FNEW-Ultimate-Ears-4271242-MEGABOOM-3-Lagoon-Blue-%2F123378877655%3Fhash%3Ditem1cb9f444d7">UE Megaboom 3 speaker</a> - $214.40</li>
+
+                    <li><a href="https://rover.ebay.com/rover/1/705-53470-19255-0/1?ff3=4&toolid=11800&pub=5575275683&campid=5338047348&mpre=https%3A%2F%2Fwww.ebay.com.au%2Fitm%2F112885099190">Yamaha ATS-2070B soundbar & subwoofer</a> - $319.20</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="signoff">
+            <p><em>That's it, see ya tomorrow!</em><br><em>--Anthony</em></p>
+            <p><span class="ec ec-notes"></span>&nbsp;<a href="https://song.link/i/1100060941">The Jon Spencer Blues Explosion - Skunk</a></p>
+        </div>
+    </div>
+  
+    </div>
+  
+<div class="wrapper">
+        <div class="item-links">
+            <p><span class="ec ec-satellite"></span>&nbsp;Aussie Broadband is the best ISP I've used since Internode's glory days. Their CEO gives <a href="https://www.aussiebroadband.com.au/blog/ausnog2018/">talks at AUSNOG</a> about their network and they even have <a href="https://www.aussiebroadband.com.au/cvc-graphs/">network utilisation charts for every NBN POI</a>. Their pricing isn't the cheapest, but if you want an ISP that's fast & reliable, give them a shot. <a href="https://www.aussiebroadband.com.au/nbn-signup/?rc=1001031">Use my affiliate link and we both get $50 credit on our next bill.</a></p>
+
+            <p><span class="ec ec-microphone"></span>&nbsp;Did you know that The Sizzle has a podcast? Eliza Sorensen and I chat about the week's news every Friday. It's a great way to quickly catch up over the weekend if you didn't have time to read the daily emails. <a href="https://media.zencast.fm/the-sizzle">Subscribe now!</a> Big thanks <a href="https://zencast.fm">ZenCast</a> (created & run by a Sizzle subscriber!) for the free hosting.</p>
+
+            <p><span class="ec ec-blush"></span>&nbsp;The Sizzle is curated by Anthony &quot;<a href="https://twitter.com/decryption">@decryption</a>&quot; Agius and emailed every weekday afternoon. <a href="https://communityinviter.com/apps/the-sizzle/sizzle">Join us on Slack</a> and chat with other Sizzle subscribers.</p>
+
+            <p><em>The Sizzle acknowledges the traditional owners of country throughout Australia and recognises their continuing connection to land, water and community. I pay my respect to them and their cultures, and to elders both past and present.​</em></p>
+
+            <p>This email was sent to <a href="mailto:*|EMAIL|*" target="_blank">*|EMAIL|*</a><br>
+            <a href="*|ABOUT_LIST|*" target="_blank">why did I get this?</a> | <a href="*|UNSUB|*">unsubscribe from this list</a> | <a href="*|UPDATE_PROFILE|*">update subscription preferences</a><br>
+            <center>*|LIST:ADDRESSLINE|*</center></p>
+       </div>
+    </div>
+   
+
+</body>
+</html>

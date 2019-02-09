@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>The Sizzle</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  
+  <style type="text/css">
+    html {
+    font-family:sans-serif;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%
+    }
+
+    body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	/* [disabled]background-color:#f1f1f1; */
+	color: #333;
+	font-size: 16px;
+	line-height: 24px;
+	padding-left: 20px;
+	padding-right: 20px;
+    }
+
+    h1 {
+    margin-top:0;
+    margin-bottom:5px;
+    font-size:22px;
+    line-height:24px;
+    font-weight:700
+    }
+
+    h2 {
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	padding-right: 40px;
+	border-top: 2px solid #333;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 700
+    }
+
+    h3 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-size: 16px;
+	font-weight: 700
+    }
+
+    h5 {
+    margin-top:5px;
+    margin-bottom:10px;
+    color:rgba(51,51,51,.5);
+    font-size:14px;
+    line-height:20px;
+    font-weight:400
+    }
+
+    p {
+    margin-bottom:15px
+    }
+
+    a {
+    color:#cc6596;
+    text-decoration:none
+    }
+    
+    a:hover {
+    color:#f13f74;
+      }
+
+    li {
+    margin-bottom:5px
+    }
+
+    .wrapper {
+	display: block;
+	max-width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: auto;
+	/* [disabled]background-color: #fff; */
+	margin-top: auto;
+    }
+
+    .wrapper.blank {
+    padding-top:0;
+    padding-bottom:0;
+    background-color:transparent
+    }
+
+    .signoff {
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 1px solid rgba(51,51,51,.7)
+    }
+
+    .footnotes {
+	margin-top: 40px;
+	color: rgba(51,51,51,.7)
+    }
+
+    .logo {
+	display: block;
+	height: 25px;
+	margin-bottom: 25px;
+    }
+
+    .overview {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .overview h2 {
+    border-top-color:#f13f74;
+    color:#f13f74
+    }
+
+    .overview a {
+    color:rgba(51,51,51,.6);
+    text-decoration:underline
+    }
+
+    .news {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .news h2 {
+    border-top-color:#ff6970;
+    color:#ff6970
+    }
+
+    .cool-shit {
+    margin-top:20px;
+    margin-bottom:20px
+    }
+
+    .cool-shit h2 {
+    border-top-color:#6acaef;
+    color:#6acaef
+    }
+
+    .links {
+    font-size:12px
+    }
+
+    .note {
+    margin-top:20px;
+    margin-bottom:20px;
+    padding:20px 20px 10px;
+    background-color:#fff5db;
+    color:rgba(51,51,51,.8)
+    }
+
+    .heading {
+    margin-bottom:20px
+    }
+	
+	.item-links {
+	font-size: 14px;
+	margin: 20 0 40	0
+	}
+  </style>
+<!-- <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> -->
+<link rel='stylesheet' href='https://unpkg.com/emoji.css/dist/emoji.min.css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="https://thesizzle.com.au"><img src="https://thesizzle.com.au/images/Logo-TheSizzle-og.png" class="logo"></a>
+    </div>
+
+    <div class="wrapper">
+    
+    <div class="heading">
+        <h1>Issue 793</h1>
+        <h5>Friday, 11th January 2019</h5>
+    </div>
+    
+    <!-- <div class="note">
+    </div> -->
+    
+    <div class="overview">
+        <h2 id="overview">In This Issue</h2>
+        <ul>
+            <li>CES 2019, Day 3. It's finally over.</li>
+            <li>Samsung Galaxy S10 will be revealed Feb 20, plus other stuff</li>
+            <li>Ring's motion detection feature is just a bunch of humans manually viewing footage</li>
+            <li>Shareholder sues Google over its poor handling of sexual harassment incidents</li>
+            <li>Another QLD copper busted accessing databases without a legit reason</li>
+            <li>The worst NBN install you'll ever see</li>
+            <li>Monetising the data your smart TV generates is quite a profitable business</li>
+            <li>A collection of weird and wonderful wireless phone chargers</li>
+        </ul>
+    </div>
+    
+    <div class="news">
+        <h2>News</h2>
+
+        <div class="item">
+            <h3>CES 2019, Day 3. It's finally over.</h3>
+            <p>               
+
+                <p>Lenovo announced a new <a href="https://www.anandtech.com/show/13833/lenovo-at-ces-2019-7th-gen-thinkpad-x1-carbon-gets-thinner">ThinkPad X1 Carbon</a> that's lighter and thinner, but won't come out until mid-2019. They also showed off a really nice <a href="https://www.tomsguide.com/us/lenovo-yoga-a940-price-specs,news-28985.html">copy of Microsoft's Surface Studio</a> (the desktop PC with a big touch screen that can fold down) that'll come out "later this year".</p>
+
+                <p><a href="https://www.anandtech.com/show/13837/lexar-at-ces-2019-1-tb-sdxc-uhdi-memory-card-announced">Lexar is selling 1TB SD cards now</a>, so that's a thing that's happened. Has a minimum sequential write speed of 30MB/sec, which is pretty good for such a big card. Will go on sale "in coming weeks" for US$499.99.</p>
+
+                <p>The Verge goes over the plethora of stuff at CES getting <a href="https://www.theverge.com/2019/1/10/18176272/amazon-alexa-assistant-devices-ces-2019-tvs-soundbars-smart-speakers-kitchen-bathroom-cars">Alexa</a> and <a href="https://www.theverge.com/2019/1/10/18175524/google-assistant-devices-ces-2019-tvs-soundbars-smart-speakers-kitchen-bathroom-cars">Google Assistant</a> support. There's loads of gear for all you smart home aficionados that I couldn't give a rats arse about.</p> 
+
+                <p>Part of CES is awards and a fancy women's sex toy won of those coveted CES Innovation Awards. But at the last minute, just days before the show, <a href="https://www.theguardian.com/technology/2019/jan/08/ces-dildo-gender-sex-toy-ose-personal-massager">the award was taken away</a>. In a statement, CES said the product "should not have been accepted for the Innovation Awards Program" because it "does not fit into any of our existing product categories". But sex toys have won in the past and there's male sex toys on the expo floor, soooo, yeah, that's kinda fucked.</p>
+
+                <p>This <a href="https://www.theverge.com/circuitbreaker/2019/1/8/18174745/lapscreen-usb-c-monitor-thin-portable-power-ces-2019">12.5" portable monitor</a> plugs directly into a USB-C port for both power and video. Dual screen laptop action on the go! Thin too, so it slides right in to any bag or sleeve. Sells for US$200 and is available now.</p>
+            </p>
+        </div>
+      
+        <div class="item">
+            <h3>Samsung Galaxy S10 will be revealed Feb 20, plus other stuff</h3>
+            <p>
+                <a href="https://ausdroid.net/2019/01/11/samsung-will-reveal-galaxy-s10-unpacked-event-february-20/">Samsung's announced an event for the 20th of February over in San Francisco</a>. They'll reveal the Galaxy S10, which is rumoured to have a "punch-hole" front camera so the entire front of the device is nothing but screen with the narrowest of bezels possible. Dunno what else will be in the S10 besides that. It'll probably be a specs beast. There should also be a prototype 5G phone (or maybe the S10 will have native 5G??) and hopefully more info on that crazy foldable device Samsung showed off in November. <a href="https://www.gizmodo.com.au/2019/01/samsung-confirms-foldable-phone-galaxy-x-flex-for-first-half-of-2019/">Samsung confirmed at CES it'll be out 1st half of 2019</a>, so you'd hope they'd have more info for us at this event in February.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Ring's motion detection feature is just a bunch of humans manually viewing footage</h3>
+            <p>
+                The Intercept has info claiming that the <a href="https://theintercept.com/2019/01/10/amazon-ring-security-camera/">popular Ring doorbell's "artificial intelligence" features like motion detection are actually powered by a bunch of Ukranians "data operators"</a> paid fuck all to manually watch the videos and mark events. Of course, Ring provides no warning that if you turn the motion detection features on it's actually Oleksiy or Ivan over in Ukraine watching you go about your business. This is fucked up on so many levels. First of all, Ring are selling a feature that doesn't work, but to make it seem like it's working, they're paying humans to act as literal mechanical turks. Then there's the whole privacy thing - who knows what sort of secret stash of footage some pervert is collecting from these cameras?!
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Shareholder sues Google over its poor handling of sexual harassment incidents</h3>
+            <p>
+                Remember that bullshit with Andy Rubin and Google from last year? Where he was using his (sometimes consensual, sometimes not) sexual relationships with people he worked with to harass them and just be a really nasty dude? Then when Google found out, they covered it up and paid Rubin a massive chunk of money to go away? James Martin, a Google shareholder, has <em>"<a href="https://techcrunch.com/2019/01/10/shareholder-suit-alleges-google-covered-up-its-sexual-harassment-problems-with-big-payouts/">filed suit in the San Mateo Superior Court Thursday morning, alleging the company's leaders deployed massive allowances to poor-behaving executives to cover up harassment scandals</a>"</em> and that is a <em>"breach of fiduciary duty, unjust enrichment, abuse of power and corporate waste"</em>. Will be interesting to see how the court goes with this case, as if it's found that Google was negligent, it could be a big wake up call for the wider tech industry and how they treat arsehole "rockstar" developers.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Another QLD copper busted accessing databases without a legit reason</h3>
+            <p>
+                Oh look, another <a href="https://www.itnews.com.au/news/yet-another-qld-cop-charged-with-hacking-517740">Queensland police officer has been busted using the police database "inappropriately"</a>. It's unknown at the moment what the 33-year old accessed and why (I'm guessing an ex-partner), they've been charged with "Computer Hacking and Misuse", which carries a maximum of 10 years in jail. This officer won't get 10 years in jail, or maybe any jail time at all. Going by previous occurrences (there's at least 3 others outlined in this article), it seems like all that happens is you get "stood down from active duty". Not even sacked from the police force, let alone a criminal punishment.
+            </p>
+        </div>
+    </div>
+
+    <div class="cool-shit">
+        <h2>Not News, But Still Cool</h2>
+
+        <div class="item">
+            <h3>The worst NBN install you'll ever see</h3>
+            <p>
+                <a href="https://forums.whirlpool.net.au/forum-replies.cfm?t=2775705">Check out this absolutely ratshit job an NBN installer did at this Whirlpool user parent's home</a>. The coax cable for the HFC install is dangling through a plasterboard cornice and you can see daylight through it! There's an internal conduit!! Looks like this installer puffed a bit of shard before rocking up to this unsuspecting person's home. To make it even worse, the installer is begging the homeowner to claim it on their house insurance instead of dobbing them in to NBN because they're afraid of getting sacked. I reckon this bloke getting sacked would do everyone a favour. Time for a new trade mate.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Monetising the data your smart TV generates is quite a profitable business</h3>
+            <p>
+                The dream TV for most of us would be pretty much a large monitor with heaps of HDMI inputs. No smart bullshit, maybe not even a tuner in it - surely not including that stuff would reduce the price of the TV right? So why aren't TV makers doing it?! <a href="https://www.theverge.com/2019/1/7/18172397/airplay-2-homekit-vizio-tv-bill-baxter-interview-vergecast-ces-2019">The Verge talked to Vizio (kinda like the USA's Kogan) and asked him what the deal is</a>. His response was that the TV market is so cut-throat, with margins so slim, that the analytics TV makers get from users (e.g: data on what you watch) is an important revenue stream. Surely someone could stand out from the crowd and release a TV with none of that shit for like $50-$100 more than a regular TV and it would find enough of a market to justify existing?
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>A collection of weird and wonderful wireless phone chargers</h3>
+            <p>
+                No bargains today (they all expired by the time I sent this out damn it), so here's some weird/cool wireless phone chargers I've seen on Aliexpress that you might want:
+
+                <ul>
+                    <li>Here's one with <a href="https://www.aliexpress.com/item/Baseus-Spider-Suction-Cup-Wireless-Charger-For-iPhone-XR-XS-Max-Portable-Fast-Wireless-charging-Pad/32933263186.html">suction cups</a> to keep it from slipping off.</li>
+
+                    <li>A <a href="https://www.aliexpress.com/item/Ascromy-Fast-Wireless-Charger-Stand-Pen-Holder-for-iPhone-XS-Max-X-XR-8-Plus-Samsung/32957068742.html">pencil cup with a spot to rest your phone</a> on that's also a Qi charger.</li>
+
+                    <li>This dock can <a href="https://www.aliexpress.com/item/3-IN-1-QI-Wireless-Charger-RAXFLY-Wireless-Charger-For-iPhone-X-Xr-XS-Max-Watch/32898145904.html">charge your AirPods, Apple Watch and iPhone at the same time</a>. It's the AirPower mat Apple never got around to making.</li>
+
+                    <li>A <a href="https://www.aliexpress.com/item/New-Bee-Fashion-Headphone-Wireless-Charging-Stand-Holder-Headphone-Stand-Holder-for-Samsung-Galaxy-S7-S7Edge/32801504699.html?spm=a2g11.10010108.1000001.7.7ee81dd9AGuZYe">headphone stand</a> with a built in Qi charger. </lio>
+
+                    <li>This is a <a href="https://www.aliexpress.com/item/CinkeyPro-Car-charger-for-iPhone-iPad-Samsung-Lighter-2-Port-USB-Car-Charger-5V-2A-Charging/32799414626.html?spm=a2g11.10010108.1000001.7.657c2c45OyFTNa">non-slip mat</a> you can chuck on your car's dashboard to charge your phone wirelessly.</li>
+
+                    <li><a href="https://www.aliexpress.com/item/CinkeyPro-Car-charger-for-iPhone-iPad-Samsung-Lighter-2-Port-USB-Car-Charger-5V-2A-Charging/32799414626.html?spm=a2g11.10010108.1000001.7.657c2c45OyFTNa">Denim/fabric clad Qi charger</a> that looks quite nice. Hopeully the blue LED that goes in when in use isn't too bright.</li>
+
+                    <li>A clear Qi charger so you can <a href="https://www.aliexpress.com/item/Baseus-10W-Qi-Wireless-Charger-for-iPhone-X-XS-Max-XR-8-Plus-Visible-Element-Wireless/32864927009.html?spm=a2g03.10010108.1000001.8.560d1156VpczpZ">see what's inside</a>. It's also rather beefy at 10W.</li>
+
+                    <li>Leather (probably fake leather) <a href="https://www.aliexpress.com/item/Mobile-Phone-Qi-Wireless-Charger-Charging-Mouse-Pad-Mat-For-iPhone-X-8-8Plus-For-Samsung/32847173998.html?spm=a2g03.10010108.1000001.8.4cf54730CaIqBm">mouse pad</a> with an integrated Qi charger.</li>
+
+                    <li><a href="https://www.aliexpress.com/item/FLOVEME-10W-Fast-Car-Qi-Wireless-Charger-For-iPhone-Xs-X-Xs-Max-Samsung-Note-9/32919180383.html?spm=a2g03.10010108.1000001.8.91c42264tZzEpG&ws_ab_test=searchweb0_0%2Csearchweb201602_4_10065_10068_10130_10547_319_10548_317_5733915_10696_10924_453_10084_454_10083_5733715_10618_10920_10921_10922_10307_537_536_10131_5733815_10132_10133_10059_10884_5734015_10887_100031_321_322_10103%2Csearchweb201603_51%2CppcSwitch_0&algo_pvid=d9459992-8f8f-462f-8ac2-ad3145897b02&algo_expid=d9459992-8f8f-462f-8ac2-ad3145897b02-11">Car vent mounted smartphone cradle</a> with a Qi charger. This one looks super useful. I'd buy this if my car didn't have CarPlay.</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="signoff">
+            <p><em>That's it, see ya tomorrow!</em><br><em>--Anthony</em></p>
+            <p><span class="ec ec-notes"></span>&nbsp;<a href="https://song.link/au/i/268793258">Hustler (Radio Edit) - Simian Mobile Disco</a></p>
+        </div>
+    </div>
+  
+    </div>
+  
+<div class="wrapper">
+        <div class="item-links">
+            <p><span class="ec ec-satellite"></span>&nbsp;Aussie Broadband is the best ISP I've used since Internode's glory days. Their CEO gives <a href="https://www.aussiebroadband.com.au/blog/ausnog2018/">talks at AUSNOG</a> about their network and they even have <a href="https://www.aussiebroadband.com.au/cvc-graphs/">network utilisation charts for every NBN POI</a>. Their pricing isn't the cheapest, but if you want an ISP that's fast & reliable, give them a shot. <a href="https://www.aussiebroadband.com.au/nbn-signup/?rc=1001031">Use my affiliate link and we both get $50 credit on our next bill.</a></p>
+
+            <p><span class="ec ec-blush"></span>&nbsp;The Sizzle is curated by Anthony &quot;<a href="https://twitter.com/decryption">@decryption</a>&quot; Agius and emailed every weekday afternoon. <a href="https://communityinviter.com/apps/the-sizzle/sizzle">Join us on Slack</a> and chat with other Sizzle subscribers.</p>
+
+            <p><em>The Sizzle acknowledges the traditional owners of country throughout Australia and recognises their continuing connection to land, water and community. I pay my respect to them and their cultures, and to elders both past and present.​</em></p>
+
+            <p>This email was sent to <a href="mailto:*|EMAIL|*" target="_blank">*|EMAIL|*</a><br>
+            <a href="*|ABOUT_LIST|*" target="_blank">why did I get this?</a> | <a href="*|UNSUB|*">unsubscribe from this list</a> | <a href="*|UPDATE_PROFILE|*">update subscription preferences</a><br>
+            <center>*|LIST:ADDRESSLINE|*</center></p>
+       </div>
+    </div>
+   
+
+</body>
+</html>
