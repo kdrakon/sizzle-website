@@ -15,10 +15,19 @@
 
   <script>window.jQuery || document.write('<scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"><\/sc' + 'ript>')</script>
 
+    <script type="application/javascript">
+        function setReferrerLink() {
+            var referrerLinkElement = document.getElementById("referrer-link");
+            var referrerCode = encodeURIComponent("{{referrer_context.referrer_base64_link}}");
+            referrerLinkElement.setAttribute("href", "/refer-a-mate?referrer=" + referrerCode);
+            referrerLinkElement.innerHTML = "https://thesizzle.com.au/refer-a-mate?referrer=" + referrerCode;
+        }
+    </script>
+
   <link href="images/Favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/Webclip.png" rel="apple-touch-icon">
 </head>
-<body class="body">
+<body class="body" onload="setReferrerLink()">
 
   <div class="hero-section alt-hero">
     <div class="wrapper">
@@ -40,11 +49,9 @@
           <div class="hero-text w-richtext">
               {{#if referrer_context}}
                   {{#if referrer_context.show_link}}
-                      <h1>Here you go, {{referrer_context.referrer.nickname}}, use this link to give your mates a free
-                          trial of The Sizzle</h1>
-                      <a href="/refer-a-mate?referrer={{{referrer_context.referrer_base64_link}}}">
-                      https://thesizzle.com.au/refer-a-mate?referrer={{{referrer_context.referrer_base64_link}}}
-                      </a>
+                      <h1>Here you go, {{referrer_context.referrer.nickname}}.</h1>
+                      <h2>Use this link to give your mates a free trial of The Sizzle</h2>
+                      <a id="referrer-link">loading...</a>
                   {{else}}
                       <h1>Hey there! {{referrer_context.referrer.nickname}} thinks you might enjoy a free trial of The Sizzle</h1>
                       <h2>Tech news & bargains with an Aussie slant, curated for you every afternoon.</h2>

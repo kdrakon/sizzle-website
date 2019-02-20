@@ -101,7 +101,7 @@ fn refer_a_mate() -> Template {
 
 #[get("/refer-a-mate?<referrer>")]
 fn refer_a_mate_link(referrer: String) -> Template {
-    let referrer_base64_link = Uri::percent_encode(referrer.as_str()).into_owned();
+    let referrer_base64_link = referrer.clone();
     let referrer = base64_decode_referrer(referrer).ok();
     let context: ReferAMateContext = ReferAMateContext {
         top_referrers: top_referrers(),
@@ -123,7 +123,7 @@ fn new_refer_a_mate_link(form_data: LenientForm<ReferAMateFormData>) -> Template
     let referrer_context =
         ReferrerContext {
             referrer: referrer.clone(),
-            referrer_base64_link: Uri::percent_encode(base64_encode_referrer(referrer).as_str()).into_owned(),
+            referrer_base64_link: base64_encode_referrer(referrer),
             show_link: true,
         };
 
