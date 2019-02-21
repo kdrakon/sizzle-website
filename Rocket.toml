@@ -1,5 +1,6 @@
-[development]
+[global]
 template_dir = "templates/"
 
+[development]
+
 [production]
-template_dir = "templates/"
