@@ -1,6 +1,7 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
 extern crate base64;
+extern crate chrono;
 extern crate clap;
 extern crate hmac;
 #[macro_use]
@@ -11,9 +12,9 @@ extern crate rocket_contrib;
 extern crate serde;
 extern crate sha2;
 
+use chrono::prelude::*;
 use clap::{App, Arg};
-use rocket::fairing::{Fairing, Info};
-use rocket::fairing::Kind;
+use rocket::fairing::{Fairing, Info, Kind};
 use rocket::http::Status;
 use rocket::request::LenientForm;
 use rocket::Rocket;
@@ -21,6 +22,7 @@ use rocket::State;
 use rocket_contrib::databases::rusqlite;
 use rocket_contrib::serve::*;
 use rocket_contrib::templates::Template;
+use rusqlite::Connection;
 
 use models::*;
 use utils::*;
@@ -89,7 +91,30 @@ fn mailchimp_subscribed_post_webhook(key: String, mailchimp_subscribed_data: Len
             match mailchimp_subscribed_data._type.as_str() {
                 "subscribe" => {
                     // TODO store referrer entry
-                    Status::Accepted
+                    let connection = db.0;
+
+                    // TODO need to have this done once in some kind of migration stage
+                    connection.execute(
+                        "CREATE TABLE IF NOT EXISTS referred_subscriptions (
+                          id                   TEXT PRIMARY KEY,
+                          referrer_code        TEXT NOT NULL,
+                          referrer_nickname    TEXT NOT NULL,
+                          fired_at             DATETIME
+                          )",
+                        &[],
+                    ).unwrap();
+
+                    let fired_at: DateTime<Utc> = Utc.datetime_from_str(&mailchimp_subscribed_data.fired_at, "%Y-%m-%d %H:%M:%S").unwrap();
+
+                    match
+                        connection.execute(
+                            "INSERT INTO referred_subscriptions (id, referrer_code, referrer_nickname, fired_at)
+                                  VALUES (?1, ?2, ?3, ?4)",
+                            &[&mailchimp_subscribed_data.id, &mailchimp_subscribed_data.referrer_code, &mailchimp_subscribed_data.referrer_nickname, &fired_at.timestamp()],
+                        ) {
+                        Ok(_) => Status::Accepted,
+                        Err() => Status::InternalServerError
+                    }
                 }
                 _ => Status::BadRequest
             }
@@ -99,27 +124,27 @@ fn mailchimp_subscribed_post_webhook(key: String, mailchimp_subscribed_data: Len
 }
 
 #[get("/refer-a-mate")]
-fn refer_a_mate() -> Template {
+fn refer_a_mate(db: DatabaseConnection) -> Template {
     let context: ReferAMateContext = ReferAMateContext {
-        top_referrers: top_referrers(),
+        top_referrers: top_referrers(db),
         referrer_context: None,
     };
     Template::render("refer-a-mate", context)
 }
 
 #[get("/refer-a-mate?<referrer>")]
-fn refer_a_mate_link(referrer: String) -> Template {
+fn refer_a_mate_link(referrer: String, db: DatabaseConnection) -> Template {
     let referrer_base64_link = referrer.clone();
     let referrer = base64_decode_referrer(referrer).ok();
     let context: ReferAMateContext = ReferAMateContext {
-        top_referrers: top_referrers(),
+        top_referrers: top_referrers(db),
         referrer_context: referrer.map(|referrer| ReferrerContext { referrer, referrer_base64_link, show_link: false }),
     };
     Template::render("refer-a-mate", context)
 }
 
 #[post("/refer-a-mate", data = "<form_data>")]
-fn new_refer_a_mate_link(form_data: LenientForm<ReferAMateFormData>, hmac_config: State<HmacConfig>) -> Template {
+fn new_refer_a_mate_link(form_data: LenientForm<ReferAMateFormData>, hmac_config: State<HmacConfig>, db: DatabaseConnection) -> Template {
     let referrer_code =
         hmac_bytes(hmac_config.secret_key.as_str(), form_data.nickname.as_str(), form_data.email.as_str()).into_hex_string();
     let referrer = Referrer::new(form_data.nickname.as_str(), referrer_code.as_str());
@@ -131,20 +156,24 @@ fn new_refer_a_mate_link(form_data: LenientForm<ReferAMateFormData>, hmac_config
         };
 
     let context: ReferAMateContext = ReferAMateContext {
-        top_referrers: top_referrers(),
+        top_referrers: top_referrers(db),
         referrer_context: Some(referrer_context),
     };
     Template::render("refer-a-mate", context)
 }
 
-fn top_referrers() -> TopReferrers {
+fn top_referrers(db: DatabaseConnection) -> TopReferrers {
     // TODO DB query
+
+    let connection = db.0;
+//    "SELECT referrer_nickname, count(*) as subscriptions from referred_subscriptions WHERE date(fired_at, '%m') = date('now', '%m')"
+
     TopReferrers {
         this_month: vec![
             Referrer::new("Sean", "1234"),
             Referrer::new("Jemma", "1234"),
         ],
-        last_month: vec![Referrer::new("Grayson", "1234")],
+        last_month: vec![],
     }
 }
 

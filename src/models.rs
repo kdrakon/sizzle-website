@@ -10,6 +10,10 @@ pub struct MailchimpConfig {
 pub struct MailChimpSubscribeData {
     #[form(field = "type")]
     pub _type: String,
+    #[form(field = "fired_at")]
+    pub fired_at: String,
+    #[form(field = "data%5Bid%5D")]
+    pub id: String,
     #[form(field = "data%5Bemail%5D")]
     pub email: String,
     #[form(field = "data%5Bmerges%5D%5BREFERRER_CODE%5D")]
