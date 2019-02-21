@@ -2,5 +2,6 @@
 template_dir = "templates/"
 
 [development]
+databases = { sizzle_db = { url = "/tmp/sizzle_db" } }
 
 [production]

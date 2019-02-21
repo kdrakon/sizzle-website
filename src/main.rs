@@ -5,33 +5,31 @@ extern crate clap;
 extern crate hmac;
 #[macro_use]
 extern crate rocket;
+#[macro_use]
 extern crate rocket_contrib;
 #[macro_use]
 extern crate serde;
 extern crate sha2;
 
-use std::env;
-
 use clap::{App, Arg};
-use hmac::{Hmac, Mac};
+use rocket::fairing::{Fairing, Info};
+use rocket::fairing::Kind;
 use rocket::http::Status;
 use rocket::request::LenientForm;
+use rocket::Rocket;
 use rocket::State;
+use rocket_contrib::databases::rusqlite;
 use rocket_contrib::serve::*;
 use rocket_contrib::templates::Template;
-use sha2::Sha256;
 
-const BASE_64_SEPARATOR: char = '🔥';
+use models::*;
+use utils::*;
 
-type HmacSha256 = Hmac<Sha256>;
+mod utils;
+mod models;
 
-struct HmacConfig {
-    secret_key: String
-}
-
-struct MailchimpConfig {
-    request_key: String
-}
+#[database("sizzle_db")]
+struct DatabaseConnection(rusqlite::Connection);
 
 fn main() {
     let matches = App::new("sizzle-website")
@@ -54,8 +52,7 @@ fn main() {
     let hmac_config = HmacConfig { secret_key: String::from(matches.value_of("hmac-secret-key").unwrap()) };
     let mailchimp_config = MailchimpConfig { request_key: String::from(matches.value_of("mailchimp-request-key").unwrap()) };
 
-    rocket
-    ::ignite()
+    rocket::ignite()
         .mount("/", routes![
             mailchimp_subscribed_get_webhook,
             mailchimp_subscribed_post_webhook,
@@ -65,66 +62,40 @@ fn main() {
         ])
         .mount("/", StaticFiles::from("static"))
         .attach(Template::fairing())
+        .attach(DatabaseConnection::fairing())
         .manage(hmac_config)
         .manage(mailchimp_config)
         .launch();
 }
 
-#[derive(FromForm, Debug)]
-struct MailChimpSubscribeData {
-    #[form(field = "type")]
-    _type: String,
-    #[form(field = "data%5Bemail%5D")]
-    email: String,
-    #[form(field = "data%5Bmerges%5D%5BREFERRER_CODE%5D")]
-    referrer_code: String,
-    #[form(field = "data%5Bmerges%5D%5BREFERRER_NICKNAME%5D")]
-    referrer_nickname: String,
+struct DatabaseInit {}
+
+impl Fairing for DatabaseInit {
+    fn info(&self) -> Info { Info { name: "DatabaseInit", kind: Kind::Attach } }
+    fn on_launch(&self, rocket: &Rocket) {}
 }
 
-// TODO need secret query key that only mailchimp will know
-#[get("/mailchimp/subscribed", data = "<mailchimp_subscribed_data>")]
-fn mailchimp_subscribed_get_webhook(mailchimp_subscribed_data: LenientForm<MailChimpSubscribeData>, mailchimp_config: State<MailchimpConfig>) -> Result<Status, Status> {
-    mailchimp_subscribed_post_webhook(mailchimp_subscribed_data, mailchimp_config)
+#[get("/mailchimp/subscribed?<key>", data = "<mailchimp_subscribed_data>")]
+fn mailchimp_subscribed_get_webhook(key: String, mailchimp_subscribed_data: LenientForm<MailChimpSubscribeData>,
+                                    mailchimp_config: State<MailchimpConfig>, db: DatabaseConnection) -> Status {
+    mailchimp_subscribed_post_webhook(key, mailchimp_subscribed_data, mailchimp_config, db)
 }
 
-#[post("/mailchimp/subscribed", data = "<mailchimp_subscribed_data>")]
-fn mailchimp_subscribed_post_webhook(mailchimp_subscribed_data: LenientForm<MailChimpSubscribeData>, mailchimp_config: State<MailchimpConfig>) -> Result<Status, Status> {
-    // TODO store referrer entry
-    Ok(Status::Accepted)
-}
-
-#[derive(Serialize)]
-struct ReferAMateContext {
-    top_referrers: TopReferrers,
-    referrer_context: Option<ReferrerContext>,
-}
-
-#[derive(Serialize, Clone, Debug)]
-struct Referrer {
-    nickname: String,
-    referrer_code: String,
-}
-
-impl Referrer {
-    fn new(nickname: &str, referrer_code: &str) -> Referrer {
-        let nickname = String::from(nickname);
-        let referrer_code = String::from(referrer_code);
-        Referrer { nickname, referrer_code }
+#[post("/mailchimp/subscribed?<key>", data = "<mailchimp_subscribed_data>")]
+fn mailchimp_subscribed_post_webhook(key: String, mailchimp_subscribed_data: LenientForm<MailChimpSubscribeData>,
+                                     mailchimp_config: State<MailchimpConfig>, db: DatabaseConnection) -> Status {
+    match key {
+        ref valid_key if mailchimp_config.request_key.eq(valid_key) => {
+            match mailchimp_subscribed_data._type.as_str() {
+                "subscribe" => {
+                    // TODO store referrer entry
+                    Status::Accepted
+                }
+                _ => Status::BadRequest
+            }
+        }
+        _ => Status::Unauthorized
     }
-}
-
-#[derive(Serialize, Debug)]
-struct ReferrerContext {
-    referrer: Referrer,
-    referrer_base64_link: String,
-    show_link: bool,
-}
-
-#[derive(Serialize)]
-struct TopReferrers {
-    this_month: Vec<Referrer>,
-    last_month: Vec<Referrer>,
 }
 
 #[get("/refer-a-mate")]
@@ -145,12 +116,6 @@ fn refer_a_mate_link(referrer: String) -> Template {
         referrer_context: referrer.map(|referrer| ReferrerContext { referrer, referrer_base64_link, show_link: false }),
     };
     Template::render("refer-a-mate", context)
-}
-
-#[derive(FromForm)]
-struct ReferAMateFormData {
-    email: String,
-    nickname: String,
 }
 
 #[post("/refer-a-mate", data = "<form_data>")]
@@ -183,42 +148,3 @@ fn top_referrers() -> TopReferrers {
     }
 }
 
-fn base64_encode_referrer(referrer: Referrer) -> String {
-    let concat = format!("{}{}{}", referrer.nickname, BASE_64_SEPARATOR, referrer.referrer_code);
-    base64::encode(&concat)
-}
-
-fn base64_decode_referrer(base64str: String) -> Result<Referrer, ()> {
-    match base64::decode(&base64str) {
-        Err(_) => Err(()),
-        Ok(referrer) => {
-            match String::from_utf8(referrer) {
-                Err(_) => Err(()),
-                Ok(referrer) => {
-                    let split: Vec<&str> = referrer.split(BASE_64_SEPARATOR).collect::<Vec<&str>>();
-                    if split.len() == 2 {
-                        Ok(Referrer::new(split[0], split[1]))
-                    } else {
-                        Err(())
-                    }
-                }
-            }
-        }
-    }
-}
-
-fn hmac_bytes(key: &str, nickname: &str, email: &str) -> Vec<u8> {
-    let mut mac = HmacSha256::new_varkey(key.as_bytes()).expect("HMAC can take key of any size");
-    mac.input(format!("{}{}", nickname, email).as_bytes());
-    mac.result().code().to_vec()
-}
-
-trait AsHexString {
-    fn into_hex_string(self) -> String;
-}
-
-impl AsHexString for Vec<u8> {
-    fn into_hex_string(self) -> String {
-        self.into_iter().map(|byte| format!("{:X}", byte)).collect::<Vec<String>>().join("")
-    }
-}
