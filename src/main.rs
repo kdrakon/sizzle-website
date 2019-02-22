@@ -14,8 +14,7 @@ extern crate sha2;
 
 use chrono::prelude::*;
 use clap::{App, Arg};
-use rocket::{Rocket, State};
-use rocket::fairing::{Fairing, Info, Kind};
+use rocket::State;
 use rocket::http::Status;
 use rocket::request::LenientForm;
 use rocket_contrib::databases::rusqlite;
