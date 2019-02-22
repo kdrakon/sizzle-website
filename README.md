@@ -50,3 +50,7 @@ cargo run -- -h HMAC_SECRET_KEY -m MAIL_CHIMP_KEY
 This will use a Sqlite database located at `/tmp/sizzle_db`. By default, this will listen at http://localhost:8000.
 
 A little more trivial work needs to be done to make the code production-ready.
+
+# TODO
+1. I haven't implemented the verification of the winner yet. Ideally, this would just be an HTML form where the winner would provide their email. This would then trigger a backend call that could do something like email someone to say the top referrers email was verified. Obviously, if someone recognizes the nickname, they could enter that persons email, but the real winner would still be identified.
+1. The original HTML form for subscribers does not provide input for the nickname and referer code fields. I believe Mailchimp can set defaults for these fields. In any case, the app expects values for those fields, even in the event that the webhook is called for someone who subscribed without a referral. We need some default to be set so the app can distinguish organic subscriptions vs. referred subscriptions.
