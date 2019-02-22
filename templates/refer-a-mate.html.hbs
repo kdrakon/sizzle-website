@@ -86,12 +86,15 @@
                     <div class="section-header w-richtext">
                         <h2>This month's prize is a Sonos One smart speaker!</h2>
                         <p>Share your unique link and whoever signs up the most people for a free trial of The Sizzle
-                            this month will win. Here's the current top Sizzlers:</p>
-                        <ol>
-                            {{#each top_referrers.this_month}}
-                                <li>{{this.nickname}}</li>
-                            {{/each}}
-                        </ol>
+                            this month will win.</p>
+                        {{#if top_referrers.this_month.0.nickname }}
+                            <p>Here's the current top Sizzlers:</p>
+                            <ol>
+                                {{#each top_referrers.this_month}}
+                                    <li>{{this.nickname}}</li>
+                                {{/each}}
+                            </ol>
+                        {{/if}}
 
                         {{#if top_referrers.last_month.0.nickname}}
                             <h2>Last month's top Sizzler</h2>
