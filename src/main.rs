@@ -69,13 +69,6 @@ fn main() {
         .launch();
 }
 
-struct DatabaseInit {}
-
-impl Fairing for DatabaseInit {
-    fn info(&self) -> Info { Info { name: "DatabaseInit", kind: Kind::Attach } }
-    fn on_launch(&self, rocket: &Rocket) {}
-}
-
 #[get("/mailchimp/subscribed?<key>", data = "<mailchimp_subscribed_data>")]
 fn mailchimp_subscribed_get_webhook(key: String, mailchimp_subscribed_data: LenientForm<MailChimpSubscribeData>,
                                     mailchimp_config: State<MailchimpConfig>, db: DatabaseConnection) -> Status {
