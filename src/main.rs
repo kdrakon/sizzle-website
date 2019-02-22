@@ -14,17 +14,14 @@ extern crate sha2;
 
 use chrono::prelude::*;
 use clap::{App, Arg};
+use rocket::{Rocket, State};
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::http::Status;
 use rocket::request::LenientForm;
-use rocket::Rocket;
-use rocket::State;
 use rocket_contrib::databases::rusqlite;
 use rocket_contrib::serve::*;
 use rocket_contrib::templates::Template;
-use rusqlite::Connection;
-use rusqlite::Row;
-use rusqlite::Statement;
+use rusqlite::{Connection, Row, Statement};
 
 use models::*;
 use utils::*;
@@ -92,8 +89,7 @@ fn mailchimp_subscribed_post_webhook(key: String, mailchimp_subscribed_data: Len
         ref valid_key if mailchimp_config.request_key.eq(valid_key) => {
             match mailchimp_subscribed_data._type.as_str() {
                 "subscribe" => {
-                    // TODO store referrer entry
-                    let connection = db.0;
+                     let connection = db.0;
 
                     // TODO need to have this done once in some kind of migration stage
                     connection.execute(
@@ -187,7 +183,7 @@ fn top_referrers(db: DatabaseConnection) -> Result<TopReferrers, rusqlite::Error
     }
 
     fn get_referrers(connection: &Connection, year_month: (i32, i8)) -> Result<Vec<Referrer>, rusqlite::Error> {
-        let year_month = format!("{}-{}", year_month.0, year_month.1);
+        let year_month = format!("{:04}-{:02}", year_month.0, year_month.1);
         query(connection).and_then(|mut statement| {
             statement.query_map(&[&year_month], map_referrer)
                 .and_then(|results| results.collect::<Result<Vec<Referrer>, rusqlite::Error>>())
