@@ -23,6 +23,8 @@ use rocket_contrib::databases::rusqlite;
 use rocket_contrib::serve::*;
 use rocket_contrib::templates::Template;
 use rusqlite::Connection;
+use rusqlite::Row;
+use rusqlite::Statement;
 
 use models::*;
 use utils::*;
@@ -113,7 +115,7 @@ fn mailchimp_subscribed_post_webhook(key: String, mailchimp_subscribed_data: Len
                             &[&mailchimp_subscribed_data.id, &mailchimp_subscribed_data.referrer_code, &mailchimp_subscribed_data.referrer_nickname, &fired_at.timestamp()],
                         ) {
                         Ok(_) => Status::Accepted,
-                        Err() => Status::InternalServerError
+                        Err(_) => Status::InternalServerError
                     }
                 }
                 _ => Status::BadRequest
@@ -126,7 +128,7 @@ fn mailchimp_subscribed_post_webhook(key: String, mailchimp_subscribed_data: Len
 #[get("/refer-a-mate")]
 fn refer_a_mate(db: DatabaseConnection) -> Template {
     let context: ReferAMateContext = ReferAMateContext {
-        top_referrers: top_referrers(db),
+        top_referrers: top_referrers(db).unwrap_or(TopReferrers::empty()),
         referrer_context: None,
     };
     Template::render("refer-a-mate", context)
@@ -137,7 +139,7 @@ fn refer_a_mate_link(referrer: String, db: DatabaseConnection) -> Template {
     let referrer_base64_link = referrer.clone();
     let referrer = base64_decode_referrer(referrer).ok();
     let context: ReferAMateContext = ReferAMateContext {
-        top_referrers: top_referrers(db),
+        top_referrers: top_referrers(db).unwrap_or(TopReferrers::empty()),
         referrer_context: referrer.map(|referrer| ReferrerContext { referrer, referrer_base64_link, show_link: false }),
     };
     Template::render("refer-a-mate", context)
@@ -156,24 +158,54 @@ fn new_refer_a_mate_link(form_data: LenientForm<ReferAMateFormData>, hmac_config
         };
 
     let context: ReferAMateContext = ReferAMateContext {
-        top_referrers: top_referrers(db),
+        top_referrers: top_referrers(db).unwrap_or(TopReferrers::empty()),
         referrer_context: Some(referrer_context),
     };
     Template::render("refer-a-mate", context)
 }
 
-fn top_referrers(db: DatabaseConnection) -> TopReferrers {
-    // TODO DB query
-
-    let connection = db.0;
-//    "SELECT referrer_nickname, count(*) as subscriptions from referred_subscriptions WHERE date(fired_at, '%m') = date('now', '%m')"
-
-    TopReferrers {
-        this_month: vec![
-            Referrer::new("Sean", "1234"),
-            Referrer::new("Jemma", "1234"),
-        ],
-        last_month: vec![],
+fn top_referrers(db: DatabaseConnection) -> Result<TopReferrers, rusqlite::Error> {
+    fn query(connection: &Connection) -> Result<Statement, rusqlite::Error> {
+        connection.prepare("
+            SELECT
+               referrer_nickname,
+               referrer_code,
+               strftime('%Y-%m', datetime(fired_at, 'unixepoch', 'localtime')) AS year_month,
+               count(*) as subscribed
+            FROM referred_subscriptions
+            WHERE year_month = ?1
+            GROUP BY referrer_code, year_month
+            ORDER BY subscribed DESC, min(fired_at) ASC
+            LIMIT 10"
+        )
     }
+
+    fn map_referrer(row: &Row) -> Referrer {
+        let nickname: String = row.get(0);
+        let referrer_code: String = row.get(1);
+        Referrer::new(nickname.as_str(), referrer_code.as_str())
+    }
+
+    fn get_referrers(connection: &Connection, year_month: (i32, i8)) -> Result<Vec<Referrer>, rusqlite::Error> {
+        let year_month = format!("{}-{}", year_month.0, year_month.1);
+        query(connection).and_then(|mut statement| {
+            statement.query_map(&[&year_month], map_referrer)
+                .and_then(|results| results.collect::<Result<Vec<Referrer>, rusqlite::Error>>())
+        })
+    }
+
+    let now = Local::now();
+    let this_year_month = (now.year(), now.month() as i8);
+    let last_year_month = match this_year_month {
+        (year, month) if month == 1 => (year - 1, 12),
+        (year, month) => (year, month - 1)
+    };
+
+    get_referrers(&db.0, this_year_month)
+        .and_then(|this_month| {
+            get_referrers(&db.0, last_year_month).map(|last_month| {
+                TopReferrers { this_month, last_month }
+            })
+        })
 }
 

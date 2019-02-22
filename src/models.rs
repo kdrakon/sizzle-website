@@ -55,6 +55,12 @@ pub struct TopReferrers {
     pub last_month: Vec<Referrer>,
 }
 
+impl TopReferrers {
+    pub fn empty() -> TopReferrers {
+        TopReferrers { this_month: vec![], last_month: vec![] }
+    }
+}
+
 #[derive(FromForm)]
 pub struct ReferAMateFormData {
     pub email: String,
